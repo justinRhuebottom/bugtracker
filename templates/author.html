@@ -1,0 +1,29 @@
+<body>
+    <h1>{{ author.display_name }}: 
+    <br>
+    Filed Tickets</h1>
+    {% for ticket in tickets %}
+    <ul style="list-style: none">
+        <li>
+            <h2><a href="/ticket/{{ticket.id}}/">{{ ticket.title }}<a></h2>
+        </li>
+    </ul>
+    {% endfor %}
+    <h1>Assigned Tickets</h1>
+    {% for ticket in assigned_tickets %}
+    <ul style="list-style: none">
+        <li>
+            <h2><a href="/ticket/{{ticket.id}}/">{{ ticket.title }}<a></h2>
+        </li>
+    </ul>
+    {% endfor %}
+    <h1>Completed Tickets</h1>
+    {% for ticket in completed_tickets %}
+    <ul style="list-style: none">
+        <li>
+            <h2><a href="/ticket/{{ticket.id}}/">{{ ticket.title }}<a></h2>
+        </li>
+    </ul>
+    {% endfor %}
+    <h4><a href="/">Home</a></h4>
+</body>

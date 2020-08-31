@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Tracker</title>
+</head>
+<body>
+    <h1>Bug Tracker</h1>
+    {% if not user.is_authenticated %}
+        <h3 id="center"><a href="/login/">Login</a></h3>
+    {% elif user.is_authenticated %}
+        <div>Authenicated</div>
+        <br>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <select name="sort" onChange="this.form.submit()">
+                <option value="" selected disabled hidden>Sort By</option>
+                <option value="New">New</option>
+                <option value="Done">Done</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Invalid">Invalid</option>
+            </select>
+        </form>
+
+        <table class="pure-table pure-table-horizontal">
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Author</th>
+            <th>Assigned</th>
+            <th>Completer</th>
+        </tr>
+        {% for ticket in tickets %}
+            <tr>
+            <th><a href="/ticket/{{ticket.id}}/" > {{ ticket.title }}<a></th> 
+            <th>{{ ticket.status }}</th>
+            <th><a href="/author/{{ticket.author.id}}" > {{ ticket.author }}</th>
+            <th>{{ ticket.assigned }}</th>
+            {% if ticket.completer != None %}
+                <th>{{ ticket.completer }}</th>
+            {% else %}
+                <th> </th>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from BugTrackerApp.views import *
 
 urlpatterns = [
+    path('', index_view, name="homepage"),
+    path("ticket/<int:ticket_id>/", ticket_view),
+    path("author/<int:author_id>/", author_view),
+    path("addticket/", add_ticket, name="addticket"),
+    path('login/', login_view),
+    path('logout/', logout_view),
     path('admin/', admin.site.urls),
 ]

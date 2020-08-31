@@ -1,0 +1,30 @@
+<body>
+    <h1>{{ ticket }}</h1>
+    <h3>Description: {{ ticket.description }}</h3>
+    <h3>Time Created: {{ ticket.time }}</h3>
+    <h3>Status: {{ ticket.status }}</h3>
+    <h2>Author: <a href="/author/{{ticket.author.id}}">{{ ticket.author }}</a></h2>
+    <h2>Assigned: <a href="/author/{{ticket.assigned.id}}">{{ ticket.assigned }}</a></h2>
+    {% if ticket.completer %}
+        <h2>Completer <a href="/author/{{ticket.completer.id}}">{{ ticket.completer }}</a></h2>
+    {% else %}
+        <h2>Completer: None</h2>
+    {% endif %}
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <select name="options">
+        <option value="" selected disabled hidden>Options</option>
+        <option value="Assign">Assign ticket to yourself</option>
+        <option value="Invalid">Mark ticket as invalid</option>
+        <option value="Complete">Mark ticket as complete</option>
+        <option value="Edit">Edit ticket</option>
+    </select>
+    <h5>Edit Current Ticket</h5>
+    <input type="text" name="New Title" value="New Title">
+    <input type="text" name="New Description" value="New Description">
+    <input type="submit" class="pure-button" value="Submit">
+    </form>
+
+    <h4><a href="/">Home</a></h4>
+</body>
